@@ -8,8 +8,10 @@
 <h2>회원가입</h2>
 <hr>
 <form action="/register" method="post">
-    <input type="text" placeholder="email을 입력하세요" name="email"><br>
-    <input type="password" placeholder="비밀번호를 입력하세요" name="pw"><br>
+    <input type="text" id="userid" placeholder="email을 입력하세요" name="email" required><br>
+    <input type="button" onclick="run()" value="아이디 중복확인"><br>
+    <div id="resultTxt">here..!</div> <br>
+    <input type="password" placeholder="비밀번호를 입력하세요" name="pw" required><br>
     <input type="text" placeholder="이름을 입력하세요" name="userName"><br>
     <input type="text" placeholder="핸드폰 번호를 입력하세요" name="phoneNumber"><br>
     <input type="text" placeholder="주소를 입력하세요" name="address"><br><br>
@@ -17,5 +19,25 @@
     <input type="submit" value="회원가입">
 </form>
 
+<script>
+    const frm = document.querySelector("form");
+    const idtxt = document.querySelector("#userid");
+    function run(){
+        if(idtxt.value != ''){
+            const xhttp = new XMLHttpRequest();
+            xhttp.onload = function() {
+                document.getElementById("resultTxt").innerHTML = this.responseText; //응답 문자열 -  msg 내용 뿌려줌
+            }
+            //로드 되면서 서버랑 통신을 하고 응답받은 문자열을 받아옴
+            xhttp.open("GET", "/idcheck?email=" + idtxt.value, true); //서버의 자원 주소 /idcheck
+            // 통신을 설정하고 있음 / 서버의 주소, 방식
+            xhttp.send();
+            // 보내기
+        }else{
+            alert("아이디를 입력해주세요!")
+        }
+        console.log("idchek 종료...")
+    }
+</script>
 </body>
 </html>

@@ -5,20 +5,32 @@ import com.example.project.dto.UserDto;
 import com.example.project.repository.UserRepository;
 import com.example.project.service.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 @RequiredArgsConstructor
-@RestController
+@Controller
 public class UserController {
 
     private final UserService userService;
 
     @PostMapping("/register")
     public String regMember(UserDto userDto){
-        userService.save(userDto);
-        return "성공!!!!";
+        User result = userService.save(userDto);
+        String view = "";
+        if (result != null){
+            view = "success";
+        }else {
+            view = "fail";
+        }
+        return view;
+    }
+    @GetMapping("/idcheck")
+    public @ResponseBody String idcheck(@RequestParam String email){
+         String result = userService.idCheck(email);
+        return result;
     }
 
 }
