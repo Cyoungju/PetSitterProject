@@ -1,9 +1,14 @@
 package com.example.project.domain;
 
+import com.example.project.core.StringArrayConverter;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -29,15 +34,19 @@ public class User {
     @Column(length = 500)
     private String address;
 
-    private String role;
+    @Column(length = 30)
+    @Convert(converter = StringArrayConverter.class)
+    private List<String> roles = new ArrayList<>();
 
 
-    public User(String email, String pw, String userName, String phoneNumber, String address, String role) {
+
+    @Builder
+    public User(Long id, String email, String pw, String userName, String phoneNumber,String address, List<String> roles) {
         this.email = email;
         this.pw = pw;
         this.userName = userName;
         this.phoneNumber = phoneNumber;
         this.address = address;
-        this.role = role;
+        this.roles = roles;
     }
 }

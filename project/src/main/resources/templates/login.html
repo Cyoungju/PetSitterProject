@@ -2,15 +2,53 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/style.css">
     <title>로그인</title>
 </head>
 <body>
-<h2>로그인</h2>
-<hr>
-<form action="" method="post">
-    <input type="text" placeholder="아이디를 입력하세요" name="email">
-    <input type="text" placeholder="비밀번호를 입력하세요" name="pw">
-    <input type="submit" value="로그인">
-</form>
+    <header id="header">
+        <div class="container flex">
+            <a href="" class="logo">
+                <img src="images/logo.png" alt="">
+            </a>
+            <ul class="menu flex">
+                <li><a href="">펫시터 둘러보기</a></li>
+                <li><a href="">반려동물 등록</a></li>
+                <li><a href="">공지사항</a></li>
+            </ul>
+            <a th:if="${session.userDto == null}" th:href="@{/login}" class="login font18 btn">Login</a> 
+            <a th:if="${session.userDto != null}" th:href="@{/logout}" class="login font18 btn">logout</a> 
+        </div>
+    </header>
+    <div class="icon"><img src="images/icon.png" alt=""></div>
+    <section class="section register">
+        <div class="container">
+            <div class="tit">login</div>
+            <div class="cont_box font18">
+                <div class="brBox">
+                    <form action="/loginProc" method="post">
+                        <div class="box">
+                            <input type="text" placeholder="아이디를 입력하세요" name="email">
+                        </div>
+                        <div class="box">
+                            <input type="text" placeholder="비밀번호를 입력하세요" name="pw">
+                        </div>
+                        <input type="submit" class="font18 btn mt-30" value="로그인">
+                    </form>
+
+                    <div class="mt-50">
+                        <a th:href="@{/register}" class="font28">Sign Up</a>
+                        <p clas="font-18 grfont">회원이 아니신가요?</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="footer">
+        <div class="txt font18">
+            © Pet Sitter. All Rights Reserved
+        </div>
+    </footer>
 </body>
 </html>

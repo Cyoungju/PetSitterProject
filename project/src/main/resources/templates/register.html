@@ -2,22 +2,68 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/style.css">
     <title>회원가입</title>
 </head>
 <body>
-<h2>회원가입</h2>
-<hr>
-<form action="/register" method="post">
-    <input type="text" id="userid" placeholder="email을 입력하세요" name="email" required><br>
-    <input type="button" onclick="run()" value="아이디 중복확인"><br>
-    <div id="resultTxt">here..!</div> <br>
-    <input type="password" placeholder="비밀번호를 입력하세요" name="pw" required><br>
-    <input type="text" placeholder="이름을 입력하세요" name="userName"><br>
-    <input type="text" placeholder="핸드폰 번호를 입력하세요" name="phoneNumber"><br>
-    <input type="text" placeholder="주소를 입력하세요" name="address"><br><br>
+    <header id="header">
+        <div class="container flex">
+            <a href="" class="logo">
+                <img src="images/logo.png" alt="">
+            </a>
+            <ul class="menu flex">
+                <li><a href="">펫시터 둘러보기</a></li>
+                <li><a href="">반려동물 등록</a></li>
+                <li><a href="">공지사항</a></li>
+            </ul>
+            <a th:if="${session.userDto == null}" th:href="@{/login}" class="login font18 btn">Login</a> 
+            <a th:if="${session.userDto != null}" th:href="@{/logout}" class="login font18 btn">logout</a> 
+        </div>
+    </header>
 
-    <input type="submit" value="회원가입">
-</form>
+    <div class="icon"><img src="images/icon.png" alt=""></div>
+    <section class="section register">
+        <div class="container">
+            <div class="tit">Sign Up</div>
+            <div class="cont_box font18">
+                <form action="/register" method="post">
+                    <div class="box text-left">
+                        <label class="font28" for="userid">E-mail</label><br>
+                        <input type="text" id="userid" placeholder="email을 입력하세요" name="email" required> 
+
+                        <input type="button" onclick="run()" value="아이디 중복확인" class="font18 btn mt-10"><br>
+                        <div id="resultTxt">here..!</div> <br>
+                    </div>
+                    
+                    <div class="box text-left">
+                        <label class="font28" for="pw">Password</label><br>
+                        <input type="password" placeholder="비밀번호를 입력하세요" id="pw" name="pw" required>
+                    </div>
+                    <div class="box text-left">
+                        <label class="font28" for="userName">userName</label><br>
+                        <input type="text" id="userName" placeholder="이름을 입력하세요" name="userName"> 
+                    </div>
+                    <div class="box text-left">
+                        <label class="font28" for="phoneNumber">phoneNumber</label><br>
+                        <input type="text" placeholder="핸드폰 번호를 입력하세요" id="phoneNumber" name="phoneNumber"> 
+                    </div>
+                    <div class="box text-left">
+                        <label class="font28" for="address">Address</label><br>
+                        <input type="text" placeholder="주소를 입력하세요" id="address" name="address"> 
+                    </div>
+                    
+                    <input type="submit" class="font18 btn mt-20" value="회원가입">
+                </form>
+            </div>
+        </div>
+    </section>
+</body>
+
+<footer id="footer">
+    <div class="txt font18">
+        © Pet Sitter. All Rights Reserved
+    </div>
+</footer>
 
 <script>
     const frm = document.querySelector("form");
@@ -39,5 +85,6 @@
         console.log("idchek 종료...")
     }
 </script>
+
 </body>
 </html>

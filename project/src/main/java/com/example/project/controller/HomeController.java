@@ -1,5 +1,6 @@
 package com.example.project.controller;
 
+import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -21,5 +22,17 @@ public class HomeController {
     @GetMapping("/login")
     public String login(){
         return "login";
+    }
+
+    @GetMapping("/success")
+    public String success(){
+        return "success";
+    }
+
+    //로그아웃
+    @GetMapping("/logout")
+    public String logout(HttpSession session){
+        session.invalidate();
+        return "redirect:/";
     }
 }

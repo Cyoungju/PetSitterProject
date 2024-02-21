@@ -2,11 +2,84 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <link rel="stylesheet" href="css/style.css">
+    <title>펫시터 메인화면</title>
 </head>
 <body>
-    Welcome My WebPage!<br><br>
+    <header id="header">
+        <div class="container flex">
+            <a href="" class="logo">
+                <img src="images/logo.png" alt="">
+            </a>
+            <ul class="menu flex">
+                <li><a href="">펫시터 둘러보기</a></li>
+                <li><a href="">반려동물 등록</a></li>
+                <li><a href="">공지사항</a></li>
+            </ul>
+            <a th:if="${session.userDto == null}" th:href="@{/login}" class="login font18 btn">Login</a> 
+            <a th:if="${session.userDto != null}" th:href="@{/logout}" class="login font18 btn">logout</a> 
+        </div>
+    </header>
+    <main>
+        <div class="mainslide">
+            <div class="img">
+                <img src="images/mainslide.jpg" alt="">
+            </div>
+            <div class="txt">
+                <p class="tit">Welcome My Pet Sitter!</p>
+                <p class="font18 grfont">
+                    나와 내 반려동물을 위한 펫시터 서비스!
+                </p>
+                <a href="" class="font18 btn mt-20">View More</a>
+            </div>
+        </div>
+  
+        <div class="icon"><img src="images/icon.png" alt=""></div>
+        <section class="section">
+            <div class="container">
+                <div class="tit">How To Pet Sitter</div>
+                <div class="font18 grfont">펫시터를 이용해보세요!</div>
 
-    <a th:href="@{/register}">회원가입하러가기</a>
+                <div class="cont_box flexList" boxCount="3">
+                    <a href="" class="iconBox box">
+                        <div class="img brBox">
+                            <img src="images/icon01.png" alt="">
+                        </div>
+                        <p class="font28 mt-20 txt">펫시터 등록</p>
+                        <p class="font18 grfont">펫시터등록후 이용가능합니다!</p>
+                    </a>
+
+                    <a href="" class="iconBox box">
+                        <div class="img brBox">
+                            <img src="images/icon02.png" alt="">
+                        </div>
+                        <p class="font28 mt-20 txt">반려동물 등록</p>
+                        <p class="font18 grfont">나의 반려동물을 등록해보세요!</p>
+                    </a>
+
+                    <a href="" class="iconBox box"> 
+                        <div class="img brBox">
+                            <img src="images/icon03.png" alt="">
+                        </div>
+                        <p class="font28 mt-20 txt">공지사항</p>
+                        <p class="font18 grfont">펫시터의 소식을 알아보세요!</p>
+                    </a>
+                </div>
+            </div>
+        </section>
+        <section class="section banner">
+            <div class="container">
+                <img src="images/banner.png" alt="">
+                <p class="font30 wtfont mt-20">나와 내 반려동물을 위한 펫시터 서비스 지금 바로 이용해보세요!</p>
+            </div>
+        </section>
+    </main>
+
+    <footer id="footer">
+        <div class="txt font18">
+            © Pet Sitter. All Rights Reserved
+        </div>
+    </footer>
+    
 </body>
 </html>
