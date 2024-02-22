@@ -18,12 +18,12 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping("/register")
-    public String regMember(UserDto.UserRes userres, HttpSession session){
-        User result = userService.save(userres);
+    public String regMember(UserDto.UserRes user, HttpSession session){
+        User result = userService.save(user);
         String view = "";
         if (result != null){
             view = "success";
-            session.setAttribute("userDto",userres);
+            session.setAttribute("userDto",user);
         }else {
             view = "fail";
         }

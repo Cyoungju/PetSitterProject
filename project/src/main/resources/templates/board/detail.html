@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <title>Document</title>
+</head>
+<body>
+
+<header id="header">
+    <div class="container flex">
+        <a href="" class="logo">
+            <img th:src="@{/images/logo.png}" alt="">
+        </a>
+        <ul class="menu flex">
+            <li><a th:href="@{/}">펫시터 둘러보기</a></li>
+            <li><a th:href="@{/}">반려동물 등록</a></li>
+            <li><a th:href="@{/board/list}">문의하기</a></li>
+        </ul>
+        <a th:if="${session.userDto == null}" th:href="@{/login}" class="login font18 btn">Login</a>
+        <a th:if="${session.userDto != null}" th:href="@{/logout}" class="login font18 btn">logout</a>
+    </div>
+</header>
+<div class="icon"><img th:src="@{/images/icon.png}" alt=""></div>
+<section class="section register view">
+    <div class="container">
+        <div class="tit">문의하기</div>
+        <div class="cont_box">
+            <div class="brBox">
+                <div class="view-tit box font28">
+                    <div th:text="${board.getTitle()}"></div>
+                </div>
+                <div class="view-desc box font18">
+                    <span><b th:text="${board.getUserName()}"></b></span>
+                    <span th:text="${board.getCreateTime()}"></span>
+                </div>
+                <div class="view-cont box font18">
+                    <div class="cont" th:text="${board.getContents()}"></div>
+
+                </div>
+            </div>
+            <div class="view-btn mt-30">
+                <button onclick="listReq()" class="btn font18">목록</button>
+                <button onclick="deleteReq()" class="btn font18">삭제</button>
+                <button onclick="updateReq()" class="btn font18">수정</button>
+            </div>
+
+
+        </div>
+
+        <script>
+            // 목록 요청
+            const listReq = () => {
+                console.log("목록 요청");
+                const page = [[${page}]];
+                location.href = "/board/list?page="+page;
+            }
+
+            // 게시글 수정 요청
+            const updateReq = () => {
+                console.log("수정 요청");
+                const id = [[${board.id}]];
+                location.href = "/board/update/" + id;
+            }
+            // 게시글 삭제 요청
+            const deleteReq = () => {
+                console.log("삭제 요청");
+                const id = [[${board.id}]];
+                location.href = "/board/delete/" + id;
+            }
+        </script>
+    </div>
+</section>
+
+<footer id="footer">
+    <div class="txt font18">
+        © Pet Sitter. All Rights Reserved
+    </div>
+</footer>
+</body>
+</html>

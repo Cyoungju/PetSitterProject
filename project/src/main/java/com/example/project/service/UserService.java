@@ -28,6 +28,18 @@ public class UserService {
         return msg;
     }
 
+    public User findById(Long id){
+        Optional<User> byId = userRepository.findById(id);
+
+        if(byId.isPresent()){
+            return byId.get();
+        } else {
+            return null;
+        }
+
+
+    }
+
     public User save(UserDto.UserRes userRes) {
         User save = userRepository.save(userRes.toEntity());
         return save;
