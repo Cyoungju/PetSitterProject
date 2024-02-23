@@ -1,27 +1,12 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="css/style.css">
-    <title>로그인</title>
-</head>
-<body>
-    <header id="header">
-        <div class="container flex">
-            <a href="" class="logo">
-                <img src="images/logo.png" alt="">
-            </a>
-            <ul class="menu flex">
-                <li><a href="">펫시터 둘러보기</a></li>
-                <li><a href="">반려동물 등록</a></li>
-                <li><a href="">공지사항</a></li>
-            </ul>
-            <a th:if="${session.userDto == null}" th:href="@{/login}" class="login font18 btn">Login</a> 
-            <a th:if="${session.userDto != null}" th:href="@{/logout}" class="login font18 btn">logout</a> 
-        </div>
-    </header>
-    <div class="icon"><img src="images/icon.png" alt=""></div>
-    <section class="section register">
+<html
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{/layout/layout}"
+>
+    <th:block layout:fragment="content">
+        <div class="icon"><img th:src="@{/images/icon.png}" alt=""></div>
+        <section class="section register">
         <div class="container">
             <div class="tit">login</div>
             <div class="cont_box font18">
@@ -44,11 +29,5 @@
             </div>
         </div>
     </section>
-
-    <footer id="footer">
-        <div class="txt font18">
-            © Pet Sitter. All Rights Reserved
-        </div>
-    </footer>
-</body>
+    </th:block>
 </html>

@@ -25,6 +25,13 @@ public class BoardController {
     public String write(){
         return "/board/write";
     }
+
+    @GetMapping("/update/{id}")
+    public String update(@PathVariable Long id, Model model){
+        BoardDto boardDto = boardService.findById(id);
+        model.addAttribute("board", boardDto);//html에 있는 이름 그대로 사용
+        return "/board/update";
+    }
     // =================================
 
     // crud
@@ -61,4 +68,10 @@ public class BoardController {
 
         return "/board/detail";
     }
+
+    @PutMapping("/{id}")
+    public String uodate(Long id){
+        return "";
+    }
+
 }
