@@ -2,11 +2,8 @@ package com.example.project.service;
 
 
 import com.example.project.domain.Board;
-import com.example.project.domain.User;
 import com.example.project.dto.BoardDto;
-import com.example.project.dto.UserDto;
 import com.example.project.repository.BoardRepository;
-import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -31,6 +28,7 @@ public class BoardService {
     public void save(BoardDto boardDto) {
         boardDto.setCreateTime(LocalDateTime.now());
         boardRepository.save(boardDto.toEntity());
+
     }
 
     public Page<BoardDto> paging(Pageable pageable) {
@@ -58,5 +56,24 @@ public class BoardService {
         }else {
             return null;
         }
+    }
+
+    @Transactional
+    public void update(BoardDto boardDto) {
+        Optional<Board> boardOptional = boardRepository.findById(boardDto.getId());
+
+        if (boardOptional.isPresent()) {
+            Board board = boardOptional.get();
+            board.updateFromDTO(boardDto);
+
+            // 게시물 업데이트
+            boardRepository.save(board);
+        }
+    }
+
+
+    @Transactional
+    public void delete(Long id) {
+        boardRepository.deleteById(id);
     }
 }

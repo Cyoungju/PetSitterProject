@@ -32,6 +32,7 @@ public class BoardController {
         model.addAttribute("board", boardDto);//html에 있는 이름 그대로 사용
         return "/board/update";
     }
+
     // =================================
 
     // crud
@@ -70,8 +71,16 @@ public class BoardController {
     }
 
     @PutMapping("/{id}")
-    public String uodate(Long id){
-        return "";
+    public String update(@ModelAttribute BoardDto boardDto){
+        boardService.update(boardDto);
+        return "redirect:/board/list";
     }
+
+    @GetMapping("/delete/{id}")
+    public String delete(@PathVariable Long id){
+        boardService.delete(id);
+        return "redirect:/board/list";
+    }
+
 
 }
