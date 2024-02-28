@@ -2,7 +2,9 @@ package com.example.project.controller;
 
 import com.example.project.domain.User;
 import com.example.project.dto.BoardDto;
+import com.example.project.dto.Commentdto;
 import com.example.project.service.BoardService;
+import com.example.project.service.CommentService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -12,12 +14,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RequiredArgsConstructor
 @Controller
 @RequestMapping("/board")
 public class BoardController {
 
     private final BoardService boardService;
+
+    private final CommentService commentService;
 
     // 페이지 이동
     //create
@@ -64,13 +70,17 @@ public class BoardController {
     @GetMapping("/{id}")
     public String list(@PathVariable Long id, Model model, @PageableDefault(page = 1) Pageable pageable){
         BoardDto boardDto = boardService.findById(id);
+
+        List<Commentdto> commentdtoList = commentService.findAll(id);
+
         model.addAttribute("page", pageable.getPageNumber());
         model.addAttribute("board", boardDto);
+        model.addAttribute("commentdtoList", commentdtoList);
 
         return "/board/detail";
     }
 
-    @PutMapping("/{id}")
+    @PostMapping("/update")
     public String update(@ModelAttribute BoardDto boardDto){
         boardService.update(boardDto);
         return "redirect:/board/list";

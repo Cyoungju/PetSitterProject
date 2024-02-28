@@ -10,7 +10,8 @@
         <div class="container">
             <div class="tit">문의하기</div>
             <div class="cont_box font18">
-                <form action="/board" method="post" enctype="multipart/form-data">
+                <form action="/board/update" method="post" enctype="multipart/form-data">
+                    <input type="hidden" name="id" th:value="${board.id}">
                     <div class="box text-left">
                         <label for="userName" class="font28">작성자</label>
                         <input type="text" name="userName" id="userName" th:value="${board.getUserName()}">
@@ -23,7 +24,7 @@
                         <label for="contents" class="font28">내용</label>
                         <input type="text" name="contents" id="contents" th:value="${board.getContents()}">
                     </div>
-                    <input type="submit" class="font18 btn mt-20" value="등록">
+                    <input type="submit" class="font18 btn mt-20" value="수정">
                     <a th:href="@{/board/list}" class="font18 btn mt-20">취소</a>
                 </form>
             </div>

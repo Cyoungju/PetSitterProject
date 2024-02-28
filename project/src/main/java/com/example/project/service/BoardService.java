@@ -62,6 +62,7 @@ public class BoardService {
     public void update(BoardDto boardDto) {
         Optional<Board> boardOptional = boardRepository.findById(boardDto.getId());
 
+
         if (boardOptional.isPresent()) {
             Board board = boardOptional.get();
             board.updateFromDTO(boardDto);

@@ -48,7 +48,6 @@ public class Board {
     }
 
     public void updateFromDTO(BoardDto boardDTO){
-        // 모든 변경 사항을 셋팅. =>  기존에 있는 데이터에 저장해야하기 때문에 new 객체 생성을 하는 toEntity 사용 불가
         this.userName = boardDTO.getUserName();
         this.title = boardDTO.getTitle();
         this.contents = boardDTO.getContents();

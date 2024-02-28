@@ -8,7 +8,7 @@
             <ul class="menu flex">
                 <li><a th:href="@{/}">펫시터 둘러보기</a></li>
                 <li><a th:href="@{/}">반려동물 등록</a></li>
-                <li><a th:href="@{/board/list}">공지사항</a></li>
+                <li><a th:href="@{/board/list}">문의하기</a></li>
             </ul>
             <a th:if="${session.userDto == null}" th:href="@{/login}" class="login font18 btn">Login</a>
             <a th:if="${session.userDto != null}" th:href="@{/logout}" class="login font18 btn">logout</a>
